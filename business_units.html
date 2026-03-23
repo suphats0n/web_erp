@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kool-Way Express | Smart Logistics & Cold Chain Transport</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --navy: #0a1628;
+  --navy-mid: #122040;
+  --gold: #c9a84c;
+  --gold-light: #e8c97a;
+  --silver: #9ca3af;
+  --ice: #e8f4f8;
+  --white: #ffffff;
+  --green-corp: #1a5c38;
+  --green-mid: #236b45;
+  --green-light: #e8f3ed;
+  --text-dark: #0f1c2e;
+  --text-mid: #4a5568;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: var(--white);
+  color: var(--text-dark);
+  overflow-x: hidden;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--navy); }
+::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+/* ── TOP BAR ── */
+.topbar {
+  background: var(--navy);
+  color: var(--silver);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  padding: 8px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(201,168,76,0.2);
+}
+.topbar span { display: flex; align-items: center; gap: 6px; }
+.topbar .dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--gold); display: inline-block;
+}
+
+/* ── HEADER / NAV ── */
+header {
+  position: sticky; top: 0; z-index: 1000;
+  background: var(--white);
+  border-bottom: 1px solid rgba(10,22,40,0.08);
+  box-shadow: 0 2px 20px rgba(10,22,40,0.06);
+  padding: 0 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+}
+
+.logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+}
+
+/* LOGO PLACEHOLDER — replace <img> src when ready */
+.logo-icon {
+  width: 52px; height: 52px;
+  border-radius: 10px;
+  background: var(--navy);
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.logo-icon img {
+  width: 100%; height: 100%;
+  object-fit: contain;
+  display: none; /* will show when src set */
+}
+.logo-icon .logo-fallback {
+  display: flex; align-items: center; justify-content: center;
+  width: 100%; height: 100%;
+}
+.logo-icon .logo-fallback svg { width: 34px; height: 34px; }
+
+.logo-text { line-height: 1; }
+.logo-text .brand { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--navy); letter-spacing: -0.02em; }
+.logo-text .tagline { font-size: 10px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-top: 2px; }
+
+nav { display: flex; align-items: center; gap: 6px; }
+nav a {
+  color: var(--text-mid);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  padding: 8px 14px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  position: relative;
+}
+nav a::after {
+  content: '';
+  position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%);
+  width: 0; height: 2px;
+  background: var(--gold);
+  border-radius: 2px;
+  transition: width 0.25s ease;
+}
+nav a:hover { color: var(--navy); }
+nav a:hover::after { width: 24px; }
+.nav-cta {
+  background: var(--navy) !important;
+  color: var(--white) !important;
+  padding: 9px 20px !important;
+  border-radius: 8px !important;
+  margin-left: 6px;
+  font-size: 13px !important;
+}
+.nav-cta::after { display: none !important; }
+.nav-cta:hover { background: var(--green-corp) !important; }
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  min-height: 88vh;
+  background: var(--navy);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute; inset: 0;
+  background-image: url("https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1800&q=80");
+  background-size: cover; background-position: center;
+  opacity: 0.18;
+}
+
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(110deg, rgba(10,22,40,0.97) 45%, rgba(10,22,40,0.7) 100%);
+}
+
+/* decorative grid lines */
+.hero-grid {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.hero-content {
+  position: relative; z-index: 2;
+  padding: 0 60px;
+  max-width: 760px;
+  animation: fadeUp 0.9s ease both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: rgba(201,168,76,0.12);
+  border: 1px solid rgba(201,168,76,0.35);
+  color: var(--gold);
+  font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+  padding: 7px 16px; border-radius: 40px;
+  margin-bottom: 28px;
+}
+.hero-eyebrow .pulse {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--gold);
+  animation: pulse 1.8s infinite;
+}
+@keyframes pulse {
+  0%,100%{box-shadow:0 0 0 0 rgba(201,168,76,0.6)}
+  50%{box-shadow:0 0 0 6px rgba(201,168,76,0)}
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(38px, 5vw, 62px);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--white);
+  margin-bottom: 20px;
+  letter-spacing: -0.02em;
+}
+
+.hero h1 .accent { color: var(--gold); }
+
+.hero p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.68);
+  margin-bottom: 40px;
+  max-width: 540px;
+  font-weight: 300;
+}
+
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--gold);
+  color: var(--navy);
+  padding: 15px 32px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 14px; font-weight: 600;
+  letter-spacing: 0.04em;
+  transition: all 0.25s ease;
+  border: 2px solid var(--gold);
+}
+.btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,168,76,0.35); }
+
+.btn-outline {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent;
+  color: var(--white);
+  padding: 15px 32px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 14px; font-weight: 600;
+  letter-spacing: 0.04em;
+  border: 2px solid rgba(255,255,255,0.3);
+  transition: all 0.25s ease;
+}
+.btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,0.07); }
+
+.hero-stats {
+  position: absolute; bottom: 0; right: 0;
+  display: flex;
+  background: rgba(255,255,255,0.04);
+  border-top: 1px solid rgba(201,168,76,0.15);
+  border-left: 1px solid rgba(201,168,76,0.15);
+  border-radius: 12px 0 0 0;
+  z-index: 2;
+}
+.stat-item {
+  padding: 24px 36px;
+  text-align: center;
+  border-right: 1px solid rgba(201,168,76,0.12);
+}
+.stat-item:last-child { border-right: none; }
+.stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px; font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+}
+.stat-label {
+  font-size: 11px; font-weight: 500;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: 5px;
+}
+
+/* ── SECTION BASE ── */
+.section {
+  padding: 70px 60px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.section-label {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--green-corp);
+  margin-bottom: 14px;
+}
+.section-label::before {
+  content: '';
+  display: inline-block;
+  width: 24px; height: 2px;
+  background: var(--gold);
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px, 3.5vw, 42px);
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+
+.section-sub {
+  font-size: 15px; line-height: 1.8;
+  color: var(--text-mid); font-weight: 300;
+  max-width: 580px;
+}
+
+/* ── ABOUT ── */
+.about-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.about-image {
+  position: relative;
+}
+.about-image img {
+  width: 100%; height: 460px;
+  object-fit: cover;
+  border-radius: 14px;
+  display: block;
+}
+.about-badge {
+  position: absolute;
+  bottom: -24px; right: -24px;
+  background: var(--navy);
+  color: var(--white);
+  padding: 24px 28px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 12px 40px rgba(10,22,40,0.3);
+}
+.about-badge .num {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px; font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+}
+.about-badge .lbl { font-size: 11px; letter-spacing: 0.1em; color: rgba(255,255,255,0.55); margin-top: 4px; }
+
+.about-text { padding-left: 10px; }
+.about-text p { font-size: 15px; line-height: 1.9; color: var(--text-mid); margin-bottom: 18px; font-weight: 300; }
+
+.feature-pills { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+.pill {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: var(--green-light);
+  color: var(--green-corp);
+  font-size: 12px; font-weight: 600;
+  padding: 8px 16px; border-radius: 40px;
+  border: 1px solid rgba(26,92,56,0.15);
+}
+.pill svg { width: 14px; height: 14px; }
+
+/* ── SERVICES ── */
+.services-bg { background: var(--navy); }
+
+.services-inner {
+  padding: 70px 60px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.services-header { margin-bottom: 56px; }
+.services-header .section-label { color: var(--gold); }
+.services-header .section-title { color: var(--white); }
+.services-header .section-sub { color: rgba(255,255,255,0.5); }
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(201,168,76,0.1);
+  border: 1px solid rgba(201,168,76,0.1);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.service-card {
+  background: rgba(255,255,255,0.03);
+  padding: 36px 30px;
+  transition: background 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.service-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+.service-card:hover { background: rgba(255,255,255,0.06); }
+.service-card:hover::before { transform: scaleX(1); }
+
+.service-icon {
+  width: 52px; height: 52px;
+  background: rgba(201,168,76,0.12);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 22px;
+}
+.service-icon svg { width: 24px; height: 24px; color: var(--gold); }
+
+.service-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px; font-weight: 600;
+  color: var(--white);
+  margin-bottom: 12px;
+}
+.service-card p { font-size: 13px; line-height: 1.8; color: rgba(255,255,255,0.5); font-weight: 300; }
+.service-tag {
+  display: inline-block;
+  margin-top: 20px;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--gold);
+  padding: 5px 12px;
+  border: 1px solid rgba(201,168,76,0.25);
+  border-radius: 40px;
+}
+
+/* ── PORTFOLIO ── */
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 48px;
+}
+.portfolio-card {
+  background: var(--white);
+  border: 1px solid rgba(10,22,40,0.08);
+  border-radius: 12px;
+  padding: 32px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.portfolio-card::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--green-corp), var(--gold));
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+  transform-origin: left;
+}
+.portfolio-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(10,22,40,0.1); }
+.portfolio-card:hover::after { transform: scaleX(1); }
+
+.portfolio-icon {
+  width: 44px; height: 44px;
+  background: var(--green-light);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 20px;
+}
+.portfolio-icon svg { width: 20px; height: 20px; color: var(--green-corp); }
+
+.portfolio-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px; font-weight: 600;
+  color: var(--navy); margin-bottom: 10px;
+}
+.portfolio-card p { font-size: 13px; line-height: 1.8; color: var(--text-mid); font-weight: 300; }
+.portfolio-result {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: 20px;
+  font-size: 12px; font-weight: 700;
+  color: var(--green-corp);
+}
+.portfolio-result::before { content: '↑'; font-size: 14px; color: var(--gold); }
+
+/* ── BUSINESS UNITS ── */
+.business-bg { background: #f7f8fc; }
+.business-inner {
+  padding: 90px 60px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.business-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-top: 48px;
+}
+.business-card {
+  background: var(--white);
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(10,22,40,0.06);
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(10,22,40,0.04);
+}
+.business-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(10,22,40,0.12); }
+
+.business-card-img {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+.business-card-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.business-card:hover .business-card-img img { transform: scale(1.06); }
+.business-card-img .img-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(10,22,40,0.6), transparent);
+}
+.business-card-body { padding: 24px 22px; }
+.business-card-body h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px; font-weight: 600;
+  color: var(--navy); margin-bottom: 6px;
+}
+.business-card-body p { font-size: 13px; color: var(--text-mid); font-weight: 300; }
+.biz-tag {
+  margin-top: 14px;
+  display: inline-block;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--green-corp);
+  background: var(--green-light);
+  padding: 4px 10px; border-radius: 4px;
+}
+
+/* ── PARTNERS ── */
+.partners-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 48px;
+}
+.partner-item {
+  background: var(--white);
+  border: 1px solid rgba(10,22,40,0.07);
+  border-radius: 10px;
+  padding: 26px 20px;
+  display: flex; align-items: flex-start; gap: 16px;
+  transition: all 0.25s ease;
+}
+.partner-item:hover { border-color: var(--gold); box-shadow: 0 6px 20px rgba(201,168,76,0.12); }
+.partner-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px; font-weight: 700;
+  color: rgba(201,168,76,0.3);
+  line-height: 1;
+  flex-shrink: 0;
+}
+.partner-info h4 { font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 5px; }
+.partner-info p { font-size: 12px; color: var(--text-mid); line-height: 1.6; font-weight: 300; }
+
+/* ── CONTACT ── */
+.contact-bg { background: var(--navy); }
+.contact-inner {
+  padding: 50px 60px;
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 60px;
+  align-items: center;
+}
+.contact-left .section-label { color: var(--gold); }
+.contact-left .section-title { color: var(--white); }
+.contact-left .section-sub { color: rgba(255,255,255,0.5); }
+
+.contact-items { margin-top: 28px; display: flex; flex-direction: column; gap: 12px; }
+.contact-item {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 18px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(201,168,76,0.1);
+  border-radius: 10px;
+}
+.contact-item-icon {
+  width: 36px; height: 36px;
+  background: rgba(201,168,76,0.1);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.contact-item-icon svg { width: 16px; height: 16px; color: var(--gold); }
+.contact-item-label { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
+.contact-item-value { font-size: 13px; color: var(--white); margin-top: 2px; font-weight: 400; }
+
+.contact-right {
+  background: var(--white);
+  border-radius: 14px;
+  padding: 32px 36px;
+}
+.contact-right h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 19px; font-weight: 600;
+  color: var(--navy); margin-bottom: 20px;
+}
+.form-group { margin-bottom: 13px; }
+.form-label { font-size: 11px; font-weight: 600; letter-spacing: 0.06em; color: var(--text-mid); margin-bottom: 5px; display: block; }
+.form-input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid rgba(10,22,40,0.12);
+  border-radius: 8px;
+  font-size: 13px; font-family: 'Montserrat', sans-serif;
+  color: var(--navy);
+  background: #f9fafb;
+  transition: border-color 0.2s ease;
+  outline: none;
+}
+.form-input:focus { border-color: var(--green-corp); background: var(--white); }
+textarea.form-input { resize: none; height: 76px; }
+.form-submit {
+  width: 100%;
+  padding: 12px;
+  background: var(--navy);
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  font-size: 13px; font-weight: 600;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-transform: uppercase;
+}
+.form-submit:hover { background: var(--green-corp); transform: translateY(-1px); }
+
+/* ── FOOTER ── */
+footer {
+  background: #050d1a;
+  color: rgba(255,255,255,0.35);
+  padding: 28px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px; font-weight: 400;
+  border-top: 1px solid rgba(201,168,76,0.1);
+}
+.footer-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px; font-weight: 600;
+  color: var(--gold);
+}
+footer a { color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; }
+footer a:hover { color: var(--gold); }
+
+/* ── DIVIDER ── */
+.gold-divider {
+  width: 60px; height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  border-radius: 2px;
+  margin: 20px 0 28px;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
+  .business-grid { grid-template-columns: repeat(2, 1fr); }
+  .partners-grid { grid-template-columns: repeat(2, 1fr); }
+  .about-wrap { grid-template-columns: 1fr; gap: 60px; }
+  .contact-inner { grid-template-columns: 1fr; gap: 40px; }
+}
+
+@media (max-width: 768px) {
+  header { padding: 0 20px; }
+  nav { display: none; }
+  .hero-content { padding: 0 24px; }
+  .hero-stats { display: none; }
+  .section { padding: 60px 20px; }
+  .services-inner,.business-inner,.contact-inner { padding: 60px 20px; }
+  .services-grid,.portfolio-grid { grid-template-columns: 1fr; }
+  .topbar { padding: 8px 20px; font-size: 11px; }
+  footer { padding: 20px; flex-direction: column; gap: 8px; text-align: center; }
+}
+
+/* ── PROMO SECTION ── */
+.promo-bg {
+  background: linear-gradient(135deg, #b91c1c 0%, #7f1d1d 50%, #991b1b 100%);
+  position: relative;
+  overflow: hidden;
+}
+.promo-bg::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.05) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 20%, rgba(255,200,0,0.08) 0%, transparent 40%);
+  pointer-events: none;
+}
+/* confetti dots */
+.promo-bg::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    radial-gradient(circle, rgba(255,215,0,0.35) 2px, transparent 2px),
+    radial-gradient(circle, rgba(255,255,255,0.2) 1.5px, transparent 1.5px);
+  background-size: 60px 60px, 40px 40px;
+  background-position: 0 0, 20px 20px;
+  pointer-events: none;
+  animation: confetti-float 8s linear infinite;
+}
+@keyframes confetti-float {
+  from { background-position: 0 0, 20px 20px; }
+  to   { background-position: 0 -120px, 20px -80px; }
+}
+
+.promo-inner {
+  padding: 60px 60px;
+  max-width: 1280px;
+  margin: 0 auto;
+  position: relative; z-index: 1;
+}
+
+.promo-header {
+  text-align: center;
+  margin-bottom: 52px;
+}
+.promo-eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: rgba(255,215,0,0.15);
+  border: 1px solid rgba(255,215,0,0.4);
+  color: #fde68a;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+  padding: 7px 18px; border-radius: 40px;
+  margin-bottom: 18px;
+}
+.promo-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-shadow: 0 4px 24px rgba(0,0,0,0.3);
+}
+.promo-title .gold-word { color: #fde68a; }
+.promo-sub {
+  margin-top: 12px;
+  font-size: 15px; color: rgba(255,255,255,0.65); font-weight: 300;
+}
+.promo-deadline {
+  display: inline-flex; align-items: center; gap: 7px;
+  margin-top: 14px;
+  background: rgba(0,0,0,0.25);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.8);
+  font-size: 12px; font-weight: 600; letter-spacing: 0.08em;
+  padding: 7px 18px; border-radius: 40px;
+}
+.promo-deadline svg { width: 14px; height: 14px; color: #fde68a; }
+
+.promo-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.promo-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 36px 28px 32px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.promo-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.35);
+}
+
+/* ribbon bow */
+.promo-card::before {
+  content: '';
+  position: absolute; top: -2px; left: 50%; transform: translateX(-50%);
+  width: 56px; height: 28px;
+  background: #dc2626;
+  clip-path: polygon(0 0, 100% 0, 85% 100%, 15% 100%);
+}
+
+.promo-card-icon {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin: 18px auto 20px;
+  font-size: 28px;
+}
+.promo-card-icon.red   { background: #fef2f2; }
+.promo-card-icon.gold  { background: #fffbeb; }
+.promo-card-icon.green { background: #f0fdf4; }
+
+.promo-card-label {
+  font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+  color: #6b7280;
+  margin-bottom: 10px;
+}
+.promo-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 19px; font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 14px;
+  line-height: 1.3;
+}
+.promo-badge {
+  display: inline-block;
+  padding: 11px 26px;
+  border-radius: 10px;
+  font-size: 22px; font-weight: 800;
+  letter-spacing: -0.01em;
+  margin-bottom: 16px;
+}
+.promo-badge.red   { background: #dc2626; color: #fff; }
+.promo-badge.gold  { background: #d97706; color: #fff; }
+.promo-badge.green { background: #16a34a; color: #fff; }
+
+.promo-card p { font-size: 13px; color: #6b7280; line-height: 1.7; font-weight: 300; }
+
+.promo-card-footer {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px dashed #e5e7eb;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  font-size: 11px; font-weight: 600; color: #9ca3af;
+}
+.promo-card-footer svg { width: 14px; height: 14px; }
+
+.promo-card.featured {
+  background: var(--navy);
+  border: 2px solid rgba(201,168,76,0.4);
+}
+.promo-card.featured .promo-card-label { color: rgba(255,255,255,0.4); }
+.promo-card.featured h3 { color: #fff; }
+.promo-card.featured p  { color: rgba(255,255,255,0.55); }
+.promo-card.featured .promo-card-footer { border-color: rgba(255,255,255,0.1); color: rgba(255,255,255,0.35); }
+.promo-card.featured::before { background: var(--gold); }
+
+/* ── SCROLL ANIMATION ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
+</head>
+
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <span><span class="dot"></span> ให้บริการขนส่งครบวงจร ทั่วประเทศไทย</span>
+  <span>จ–ส 08:00–18:00 &nbsp;|&nbsp; contact@koolwayexpress.com &nbsp;|&nbsp; 02-XXX-XXXX</span>
+</div>
+
+<!-- HEADER -->
+<header>
+  <a class="logo-wrap" href="#home">
+    <div class="logo-icon" id="logoIcon">
+      <!-- LOGO IMAGE: Replace the src attribute below with your logo file path -->
+      <img id="logoImg" src="" alt="Kool-Way Express Logo">
+      <!-- Fallback icon shown until logo uploaded -->
+      <div class="logo-fallback" id="logoFallback">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="14" width="28" height="16" rx="2" fill="#c9a84c" opacity="0.9"/>
+          <rect x="28" y="18" width="10" height="12" rx="1.5" fill="#c9a84c" opacity="0.6"/>
+          <circle cx="10" cy="31" r="3.5" fill="white"/>
+          <circle cx="24" cy="31" r="3.5" fill="white"/>
+          <path d="M6 14 L10 6 H22 L22 14" stroke="#e8c97a" stroke-width="1.5" fill="none"/>
+          <rect x="14" y="8" width="5" height="6" rx="0.5" fill="#e8c97a" opacity="0.5"/>
+        </svg>
+      </div>
+    </div>
+    <div class="logo-text">
+      <div class="brand">Kool-Way Express</div>
+      <div class="tagline">Smart Logistics & Cold Chain</div>
+    </div>
+  </a>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#portfolio">Portfolio</a>
+    <a href="#promotions">Promotions</a>
+    <a href="#partners">Partners</a>
+    <a href="#contact" class="nav-cta">Contact Us</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <span class="pulse"></span>
+      Certified Cold Chain Operator · Thailand
+    </div>
+    <h1>Smart Logistics &<br>Cold Chain <span class="accent">Excellence</span></h1>
+    <p>ผู้ให้บริการขนส่งสินค้าทั่วไปและควบคุมอุณหภูมิแบบครบวงจร<br>
+    ด้วยเทคโนโลยี GPS Tracking, IoT Sensor และระบบ ERP ที่ทันสมัย</p>
+    <div class="hero-actions">
+      <a href="#services" class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        Our Services
+      </a>
+      <a href="#contact" class="btn-outline">Get a Quote</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-item"><div class="stat-num">20+</div><div class="stat-label">Fleet Vehicles</div></div>
+    <div class="stat-item"><div class="stat-num">30+</div><div class="stat-label">Professionals</div></div>
+    <div class="stat-item"><div class="stat-num">−25°C</div><div class="stat-label">Cold Chain</div></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="about-wrap reveal">
+    <div class="about-image">
+      <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80" alt="Logistics Operations">
+      <div class="about-badge">
+        <div class="num">100%</div>
+        <div class="lbl">On-Time Delivery</div>
+      </div>
+    </div>
+    <div class="about-text">
+      <div class="section-label">Who We Are</div>
+      <h2 class="section-title">ครบวงจรด้านโลจิสติกส์<br>และ Cold Chain</h2>
+      <div class="gold-divider"></div>
+      <p>Kool-Way Express เป็นบริษัทโลจิสติกส์ที่ให้บริการขนส่งสินค้าทั่วไปและขนส่งแบบควบคุมอุณหภูมิ บริษัทมุ่งเน้นการใช้เทคโนโลยีสมัยใหม่เพื่อเพิ่มประสิทธิภาพในการจัดการการขนส่ง</p>
+      <p>ปัจจุบันบริษัทมีรถขนส่งจำนวน 20 คัน และทีมงานมืออาชีพมากกว่า 30 คน ที่พร้อมให้บริการแก่โรงงานอุตสาหกรรม ร้านค้าปลีก ซูเปอร์มาร์เก็ต และธุรกิจอาหาร</p>
+      <div class="feature-pills">
+        <span class="pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          GPS Tracking
+        </span>
+        <span class="pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          IoT Sensor
+        </span>
+        <span class="pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          ERP System
+        </span>
+        <span class="pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          Real-time Alert
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<div class="services-bg">
+  <div class="services-inner" id="services">
+    <div class="services-header reveal">
+      <div class="section-label">What We Offer</div>
+      <h2 class="section-title" style="color:white;">Products & Services</h2>
+      <div class="gold-divider"></div>
+      <p class="section-sub">บริการขนส่งครบทุกประเภท ตอบโจทย์ทุกความต้องการของธุรกิจ</p>
+    </div>
+    <div class="services-grid reveal">
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </div>
+        <h3>FTL Transport</h3>
+        <p>บริการขนส่งสินค้าล็อตใหญ่แบบเต็มคันรถ เหมาะสำหรับโรงงานอุตสาหกรรมและธุรกิจขนาดใหญ่</p>
+        <span class="service-tag">Full Truck Load</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+        </div>
+        <h3>LTL Consolidation</h3>
+        <p>บริการรวมสินค้าหลายบริษัทในรถคันเดียว ช่วยลดต้นทุนสำหรับธุรกิจขนาดเล็กและ SME</p>
+        <span class="service-tag">Less Than Load</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <h3>Cold Chain Logistics</h3>
+        <p>บริการขนส่งสินค้าแช่เย็นและแช่แข็ง อุณหภูมิ −18°C ถึง −25°C พร้อมระบบตรวจสอบ</p>
+        <span class="service-tag">−18°C to −25°C</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <h3>Medical Transport</h3>
+        <p>บริการขนส่งวัคซีน ยา และเลือด ด้วยระบบควบคุมอุณหภูมิและแจ้งเตือน Real-time</p>
+        <span class="service-tag">GxP Compliant</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PORTFOLIO -->
+<section class="section" id="portfolio">
+  <div class="reveal">
+    <div class="section-label">Case Studies</div>
+    <h2 class="section-title">Portfolio</h2>
+    <div class="gold-divider"></div>
+    <p class="section-sub">ผลงานและโครงการที่ผ่านมา แสดงถึงความเชี่ยวชาญและความไว้วางใจจากลูกค้า</p>
+  </div>
+  <div class="portfolio-grid">
+    <div class="portfolio-card reveal">
+      <div class="portfolio-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+      </div>
+      <h3>Frozen Food Company</h3>
+      <p>ให้บริการขนส่งสินค้าแช่แข็งไปยังซูเปอร์มาร์เก็ตทั่วประเทศ ด้วยระบบ Cold Chain ที่ได้มาตรฐาน</p>
+      <div class="portfolio-result">ลดการสูญเสียสินค้า 20%</div>
+    </div>
+    <div class="portfolio-card reveal">
+      <div class="portfolio-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+      </div>
+      <h3>Dairy Manufacturer</h3>
+      <p>ขนส่งนมสดไปยังร้านสะดวกซื้อและร้านค้าปลีกทั่วประเทศ พร้อมควบคุมอุณหภูมิ Cold Chain</p>
+      <div class="portfolio-result">ส่งตรงเวลา 99.8%</div>
+    </div>
+    <div class="portfolio-card reveal">
+      <div class="portfolio-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 6v6l4 2"/><circle cx="19" cy="5" r="3"/></svg>
+      </div>
+      <h3>Fruit Exporter</h3>
+      <p>ขนส่งผลไม้พรีเมียมไปยังท่าเรือเพื่อการส่งออก ด้วยระบบติดตามสินค้าแบบ Real-time</p>
+      <div class="portfolio-result">รองรับ Export Standard</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROMOTIONS -->
+<div class="promo-bg" id="promotions">
+  <div class="promo-inner">
+    <div class="promo-header reveal">
+      <div class="promo-eyebrow">🎁 Special Offer · มีนาคม 2026</div>
+      <h2 class="promo-title"><span class="gold-word">Special</span> Promo</h2>
+      <p class="promo-sub">แจกโค้ดส่วนลดครั้งใหญ่ประจำเดือน — จำกัดเวลา!</p>
+      <div class="promo-deadline">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        วันนี้ – 31 มีนาคม 2026
+      </div>
+    </div>
+    <div class="promo-cards">
+
+      <!-- Card 1 -->
+      <div class="promo-card reveal">
+        <div class="promo-card-icon red">🤝</div>
+        <div class="promo-card-label">Referral Program</div>
+        <h3>โปรเพื่อน<br>แนะนำเพื่อน</h3>
+        <div class="promo-badge red">ลด 500 บาท</div>
+        <p>แนะนำเพื่อนมาใช้บริการ รับส่วนลดทันที 500 บาท สำหรับงานขนส่งครั้งถัดไปของคุณ</p>
+        <div class="promo-card-footer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          วันนี้ – 31 มีนาคม
+        </div>
+      </div>
+
+      <!-- Card 2 (featured) -->
+      <div class="promo-card featured reveal">
+        <div class="promo-card-icon gold">📦</div>
+        <div class="promo-card-label">Prepaid Package</div>
+        <h3>แพ็กเกจเหมา<br>จ่ายล่วงหน้า</h3>
+        <div class="promo-badge gold">Buy 10 Get 1 FREE</div>
+        <p>จองล่วงหน้า 10 เที่ยว รับฟรีอีก 1 เที่ยว ประหยัดสูงสุดถึง 9% ต่อปี</p>
+        <div class="promo-card-footer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          วันนี้ – 31 มีนาคม
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="promo-card reveal">
+        <div class="promo-card-icon green">🆕</div>
+        <div class="promo-card-label">New Customer</div>
+        <h3>เปิดตู้<br>ครั้งแรก</h3>
+        <div class="promo-badge green">ลด 25%</div>
+        <p>ลูกค้าใหม่รับส่วนลดทันที 25% สำหรับการขนส่งครั้งแรก ไม่มีขั้นต่ำ</p>
+        <div class="promo-card-footer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          วันนี้ – 31 มีนาคม
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- PARTNERS -->
+<section class="section" id="partners">
+  <div class="reveal">
+    <div class="section-label">Network</div>
+    <h2 class="section-title">Strategic Partners</h2>
+    <div class="gold-divider"></div>
+    <p class="section-sub">ทำงานร่วมกับพันธมิตรในเครือเพื่อสร้างระบบห่วงโซ่อุปทานที่ครบวงจร</p>
+  </div>
+  <div class="partners-grid">
+    <div class="partner-item reveal">
+      <div class="partner-num">01</div>
+      <div class="partner-info">
+        <h4>Organic CocoLand</h4>
+        <p>แหล่งผลิตมะพร้าวออร์แกนิก คุณภาพสูง มาตรฐานส่งออก</p>
+      </div>
+    </div>
+    <div class="partner-item reveal">
+      <div class="partner-num">02</div>
+      <div class="partner-info">
+        <h4>Coco Fresh Plant</h4>
+        <p>โรงงานแปรรูปผลิตภัณฑ์จากมะพร้าวครบวงจร</p>
+      </div>
+    </div>
+    <div class="partner-item reveal">
+      <div class="partner-num">03</div>
+      <div class="partner-info">
+        <h4>Kool-Way Logistics</h4>
+        <p>บริการขนส่งสินค้าและโลจิสติกส์ Cold Chain</p>
+      </div>
+    </div>
+    <div class="partner-item reveal">
+      <div class="partner-num">04</div>
+      <div class="partner-info">
+        <h4>Coconut Bar & Cafe</h4>
+        <p>ร้านคาเฟ่และร้านอาหาร จุดสุดท้ายของห่วงโซ่คุณค่า</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="contact-bg" id="contact">
+  <div class="contact-inner">
+    <div class="contact-left">
+      <div class="section-label">Get In Touch</div>
+      <h2 class="section-title">ติดต่อเรา</h2>
+      <div class="gold-divider"></div>
+      <p class="section-sub">พร้อมให้คำปรึกษาและบริการแก่ทุกธุรกิจ ด้วยทีมงานมืออาชีพที่มีประสบการณ์</p>
+      <div class="contact-items">
+        <div class="contact-item">
+          <div class="contact-item-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="contact-item-label">Address</div>
+            <div class="contact-item-value">Nakhon Pathom, Thailand</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.39 2 2 0 0 1 3.58 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div>
+            <div class="contact-item-label">Phone</div>
+            <div class="contact-item-value">02-XXX-XXXX</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <div class="contact-item-label">Email</div>
+            <div class="contact-item-value">contact@koolwayexpress.com</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div>
+            <div class="contact-item-label">Business Hours</div>
+            <div class="contact-item-value">จันทร์ – เสาร์ · 08:00 – 18:00</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-right reveal">
+      <h3>ขอใบเสนอราคา</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:13px;">
+        <div class="form-group" style="margin-bottom:0">
+          <label class="form-label">ชื่อบริษัท / ผู้ติดต่อ</label>
+          <input class="form-input" type="text" placeholder="บริษัท ABC จำกัด">
+        </div>
+        <div class="form-group" style="margin-bottom:0">
+          <label class="form-label">เบอร์โทรศัพท์</label>
+          <input class="form-input" type="tel" placeholder="08X-XXX-XXXX">
+        </div>
+      </div>
+      <div class="form-group" style="margin-top:13px;">
+        <label class="form-label">อีเมล</label>
+        <input class="form-input" type="email" placeholder="email@company.com">
+      </div>
+      <div class="form-group">
+        <label class="form-label">รายละเอียดสินค้า / ความต้องการ</label>
+        <textarea class="form-input" placeholder="ประเภทสินค้า, เส้นทาง, ความถี่..."></textarea>
+      </div>
+      <button class="form-submit">ส่งข้อความ →</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-brand">Kool-Way Express</span>
+  <span>© 2026 Kool-Way Express · Nakhon Pathom, Thailand</span>
+  <span>
+    <a href="#about">About</a> &nbsp;·&nbsp;
+    <a href="#services">Services</a> &nbsp;·&nbsp;
+    <a href="#contact">Contact</a>
+  </span>
+</footer>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Logo image loader — auto-show if src provided
+const logoImg = document.getElementById('logoImg');
+const logoFallback = document.getElementById('logoFallback');
+logoImg.addEventListener('load', () => {
+  logoImg.style.display = 'block';
+  logoFallback.style.display = 'none';
+});
+</script>
+
+</body>
+</html>
